@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/font-awesome-all.css">
+	<link rel="stylesheet" href="css/login.css">
+	<link href="css/stylesheet.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/login2.css">
+	<style>
+		
+	</style>
+    <title>Login</title>
+  </head>
+  <body style="background: linear-gradient(49deg, rgba(103,85,193,1) 0%, rgba(207,92,185,1) 73%, rgba(230,180,145,1) 100%);overflow: hidden;">
+	  <div class="loader-body">
+		<Div class="loader">
+		</Div>
+	  </div>
+	<section> 
+		<div class="side_div"></div>
+		<div class="side_div2"></div>
+		<div class="row center-login-div">
+			<Div class="col-md-4 login col-sm-8 col-xs-8">
+				<h1 class="login-title text-center">Kamdhenu Gaushala</h1>
+				<div style="margin:20px;color:black;">
+				<form id="signupForm" action="index.html" method="post">
+					<div class="mb-3 input-group">
+						<!--span class="fa fa-user"> &nbsp;</span><label for="exampleInputEmail1" class="form-label">Username</label-->
+						<span class="djjs-input-group-text fa fa-user" id="addon-wrapping" ></span>
+						<input type="text" class="form-control djjs-form-control" id="username"  name="username">
+						<!--div id="emailHelp" class="form-text hidden">We'll never share your email with anyone else.</div-->
+					  </div>
+					<div class="mb-3 input-group">
+						<span class="djjs-input-group-text fa fa-lock" id="addon-wrapping" ></span>
+						<!--span class="fa fa-lock"> &nbsp;</span><label for="exampleInputEmail1" class="form-label">Password</label-->
+						<input type="password" class="form-control djjs-form-control" id="password"  name="password">
+						<!--div id="message" class="form-text">Wrong usernaem Password!</div-->
+					 </div>
+					 <!--div class="mb-3">
+						<span class="fa fa-lock"> &nbsp;</span><label for="captcha" class="form-label">Captcha</label>
+						<input type="text" class="form-control" aria-describedby="" id="captcha" name="captcha">
+						<!--div id="message" class="form-text">Wrong usernaem Password!</div-->
+					 <!--/div-->
+					 <div class="mb-3 d-flex justify-content-center">
+					  <input type="submit" class="" style="width:100%;background: linear-gradient(49deg, rgba(103,85,193,1) 0%, rgba(207,92,185,1) 73%, rgba(230,180,145,1) 100%);border-radius: 25px;color:white;font-weight:bolder;height:50px;border:0px;" value="LOGIN"/><br>
+					  
+				  </div>
+				  <!--Div class="progressbar">
+					<Div class="scroller"></Div>
+				  </Div-->
+				</div>
+				
+			</div>
+		</div>
+	</section>
+		<script src="js/jQuery.min.js"></script>
+		<script src="js/jquery.validate.js"></script>
+		<script>
+			$('.loader-body').show();
+			$().ready(function() {
+				function validPassword(value, element, params){
+					if(value==="HELLO123"){
+						return true;
+					}else{
+						return false;
+					}
+				}
+				//$.validator.addMethod('validPassword',function(value,element,params){return validPassword(value, element, params);});
+				// validate signup form on keyup and submit
+				var errroClass2ForIcon = 'error-icon';
+				$("#signupForm").validate({
+					highlight: function( element, errorClass, validClass ) {
+						if ( element.type === "radio" ) {
+							this.findByName( element.name ).addClass( errorClass ).removeClass( validClass );
+							console.log('hi');
+						} else {
+							$( element ).addClass( errorClass ).removeClass( validClass );
+							$(element).siblings('span').addClass(errroClass2ForIcon);//.parent().child('span'));
+							console.log('bi user definded');
+							return false;
+						}	
+					},
+					
+					unhighlight: function( element, errorClass, validClass ) {
+						if ( element.type === "radio" ) {
+							this.findByName( element.name ).removeClass( errorClass ).addClass( validClass );
+						} else {
+							$( element ).removeClass( errorClass ).addClass( validClass );
+							$( element ).siblings('span').removeClass( errroClass2ForIcon );
+						}
+					},
+					
+					errorClass:'error-label',
+					rules: {
+						username : {
+							required: true,
+							email: true
+						},
+						password: {
+							required: true,
+							minlength: 5,
+							//validPassword:true,
+						},
+					},
+					messages: {
+						username: {
+							required: "Please enter a username",
+							minlength: "Your username must consist of at least 2 characters",
+							email : 'PLease enter email'
+						},
+						password: {
+							required: "Please provide a password",
+							minlength: "Your password must be at least 5 characters long",
+							validPassword: "Password Do not Match"
+						}
+					}
+				});
+			});
+			function validateUsername(){
+				var username = $('#username').val();
+				var password = $('#password').val();
+				var  success = true;
+				if(username == undefined || username.length ==0){
+					success = false;
+				}
+				if(password == undefined || (password.length>5 && password.length<10)){
+					success =false;
+				}
+				if(success == false){
+					$('#message').html('Please Fill the form');
+				}else{
+					$('#message').html('Form ok');
+				}
+				
+			}
+			var position = 2;
+			function animate(){
+				console.log('hi');
+				$('.scroller').addClass('animate');
+				//alert('dalwinder');
+				if(position==1){
+					$('.scroller').css('margin-left','0px');
+					position=2;
+				}else{
+					$('.scroller').css('margin-left','205px');
+					
+					position=1;
+				}
+			}
+			$(document).ready(function(){
+				//animate();
+				//setInterval(function(){animate()},1000);
+				$('.loader-body').hide();
+			});
+		</script>
+  </body>
+</html>

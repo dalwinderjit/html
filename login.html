@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/font-awesome-all.css">
+	<link rel="stylesheet" href="css/login.css">
+	<link href="css/stylesheet.css" rel="stylesheet">
+	<style>
+		.error-message{
+			text-align:center;padding-top:20px;border-radius:10px;border:2px solid rgb(240, 160, 160);margin:0px auto;margin-top:5%;background-color: red;height:70px;
+		}
+		.error-message2{
+			text-align:center;padding-top:20px;border-radius:10px;border:2px solid rgb(240, 160, 160);margin:0px auto;margin-top:5%;background-color: red;height:40px;
+		}
+	</style>
+    <title>Login</title>
+  </head>
+  <body>
+	  <div class="loader-body">
+		<Div class="loader">
+		</Div>
+	  </div>
+	<section> 
+		
+		<div class="row" style="margin:0px auto;color:white;">
+			<div class="col-md-4 col-sm-8 error-message col-xs-6">
+				Please provide correct username and password!!
+			</div>
+		</div>
+		<div class="row" style="margin:0px auto;color:white;">
+			<Div class="col-md-4 login col-sm-8 col-xs-8" style="margin:0px auto;margin-top:2%;">
+				<h1 class="login-title text-center">Kamdhenu Gaushala</h1>
+				<div style="margin:20px;">
+				<form id="signupForm" action="index.html" method="post">
+					<div class="mb-3">
+						<span class="fa fa-user"> &nbsp;</span><label for="exampleInputEmail1" class="form-label">Username</label>
+						<input type="text" class="form-control" id="username"  name="username">
+						<!--div id="emailHelp" class="form-text hidden">We'll never share your email with anyone else.</div-->
+					  </div>
+					<div class="mb-3">
+						<span class="fa fa-lock"> &nbsp;</span><label for="exampleInputEmail1" class="form-label">Password</label>
+						<input type="password" class="form-control" id="password"  name="password">
+						<!--div id="message" class="form-text">Wrong usernaem Password!</div-->
+					 </div>
+					 <!--div class="mb-3">
+						<span class="fa fa-lock"> &nbsp;</span><label for="captcha" class="form-label">Captcha</label>
+						<input type="text" class="form-control" aria-describedby="" id="captcha" name="captcha">
+						<!--div id="message" class="form-text">Wrong usernaem Password!</div-->
+					 <!--/div-->
+					 <div class="mb-3 d-flex justify-content-center">
+					  <input type="submit" class="login-btn-grad" value="LOGIN"/><br>
+					  
+				  </div>
+				  <!--Div class="progressbar">
+					<Div class="scroller"></Div>
+				  </Div-->
+				</div>
+				
+			</div>
+		</div>
+	</section>
+		<script src="js/jQuery.min.js"></script>
+		<script src="js/jquery.validate.js"></script>
+		<script>
+			$('.loader-body').show();
+			$().ready(function() {
+				function validPassword(value, element, params){
+					if(value==="HELLO123"){
+						return true;
+					}else{
+						return false;
+					}
+				}
+				//$.validator.addMethod('validPassword',function(value,element,params){return validPassword(value, element, params);});
+				// validate signup form on keyup and submit
+				$("#signupForm").validate({
+					errorClass:'error-label',
+					rules: {
+						username : {
+							required: true,
+							email: true
+						},
+						password: {
+							required: true,
+							minlength: 5,
+							//validPassword:true,
+						},
+					},
+					messages: {
+						username: {
+							required: "Please enter a username",
+							minlength: "Your username must consist of at least 2 characters",
+							email : 'PLease enter email'
+						},
+						password: {
+							required: "Please provide a password",
+							minlength: "Your password must be at least 5 characters long",
+							validPassword: "Password Do not Match"
+						}
+					}
+				});
+			});
+			function validateUsername(){
+				var username = $('#username').val();
+				var password = $('#password').val();
+				var  success = true;
+				if(username == undefined || username.length ==0){
+					success = false;
+				}
+				if(password == undefined || (password.length>5 && password.length<10)){
+					success =false;
+				}
+				if(success == false){
+					$('#message').html('Please Fill the form');
+				}else{
+					$('#message').html('Form ok');
+				}
+				
+			}
+			var position = 2;
+			function animate(){
+				console.log('hi');
+				$('.scroller').addClass('animate');
+				//alert('dalwinder');
+				if(position==1){
+					$('.scroller').css('margin-left','0px');
+					position=2;
+				}else{
+					$('.scroller').css('margin-left','205px');
+					
+					position=1;
+				}
+			}
+			$(document).ready(function(){
+				//animate();
+				//setInterval(function(){animate()},1000);
+				$('.loader-body').hide();
+			});
+		</script>
+  </body>
+</html>
